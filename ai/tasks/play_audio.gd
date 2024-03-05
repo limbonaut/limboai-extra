@@ -20,7 +20,7 @@ var _audio_player  # Note: Untyped to support different audio player nodes.
 
 
 func _generate_name() -> String:
-	return "PlayAudio  '%s'" % audio_player
+	return "PlayAudio %s" % [audio_player]
 
 
 func _setup() -> void:

@@ -30,7 +30,7 @@ func _generate_name() -> String:
 		group, index, LimboUtility.decorate_output_var(result_var)]
 
 
-func _tick(_delta: float) -> int:
+func _tick(_delta: float) -> Status:
 	var nodes: Array[Node] = agent.get_tree().get_nodes_in_group(group)
 	if index >= nodes.size() or index < 0:
 		push_warning("GetNodeInGroup: Node not found in group \"%s\" with index %s" % [group, index])

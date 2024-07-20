@@ -34,6 +34,6 @@ func _tick(_delta: float) -> Status:
 	if index >= nodes.size() or index < 0:
 		push_warning("GetNodeInGroup: Node not found in group \"%s\" with index %s" % [group, index])
 		return FAILURE
-	else:
-		blackboard.set_var(result_var, nodes[index])
-		return SUCCESS
+
+	blackboard.set_var(result_var, nodes[index])
+	return SUCCESS

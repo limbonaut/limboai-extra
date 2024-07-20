@@ -26,9 +26,9 @@ func _generate_name() -> String:
 
 func _tick(_delta: float) -> Status:
 	var hsm: LimboState = blackboard.get_var(hsm_var)
-	if is_instance_valid(hsm):
-		hsm.dispatch(event_name)
-		return SUCCESS
-	else:
+	if not is_instance_valid(hsm):
 		push_error("DispatchEvent: HSM not found on the blackboard")
 		return FAILURE
+
+	hsm.dispatch(event_name)
+	return SUCCESS

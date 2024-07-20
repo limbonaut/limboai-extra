@@ -29,9 +29,9 @@ func _setup() -> void:
 
 
 func _tick(_delta: float) -> Status:
-	if is_instance_valid(_audio_player):
-		_audio_player.play()
-		return SUCCESS
-	else:
-		push_warning("PlayAudio: Audio player not valid")
+	if not is_instance_valid(_audio_player):
+		push_warning("PlayAudio: AudioStreamPlayer not valid")
 		return FAILURE
+
+	_audio_player.play()
+	return SUCCESS

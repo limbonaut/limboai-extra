@@ -29,9 +29,9 @@ func _generate_name() -> String:
 
 func _tick(_delta: float) -> Status:
 	var node_inst = node.get_value(agent, blackboard) # Note: Untyped to support both Node2D and Node3D
-	if is_instance_valid(node_inst):
-		blackboard.set_var(position_var, node_inst.global_position)
-		return SUCCESS
-	else:
+	if not is_instance_valid(node_inst):
 		push_warning("SaveNodePos: Failed to resolve node parameter: " + str(node))
 		return FAILURE
+
+	blackboard.set_var(position_var, node_inst.global_position)
+	return SUCCESS

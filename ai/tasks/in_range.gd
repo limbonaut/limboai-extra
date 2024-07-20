@@ -11,11 +11,9 @@
 @tool
 extends BTCondition
 ## InRange condition checks if the agent is within a range of target,
-## defined by distance_min and distance_max.
-##
-## Returns SUCCESS if the agent is within the defined range;
-## otherwise, returns FAILURE.
-
+## defined by [member distance_min] and [member distance_max]. [br]
+## Returns [code]SUCCESS[/code] if the agent is within the given range;
+## otherwise, returns [code]FAILURE[/code].
 
 ## Minimum distance to target.
 @export var distance_min: float
@@ -23,7 +21,7 @@ extends BTCondition
 ## Maximum distance to target.
 @export var distance_max: float
 
-## Blackboard variable that holds the target (expecting Node2D).
+## Blackboard variable that holds the target (expecting [Node2D]).
 @export var target_var: StringName = &"target"
 
 var _min_distance_squared: float
@@ -45,8 +43,10 @@ func _setup() -> void:
 
 # Called when the task is executed.
 func _tick(_delta: float) -> Status:
-	var target = blackboard.get_var(target_var, null)
+	var target: Node2D = blackboard.get_var(target_var, null)
 	if not is_instance_valid(target):
+		push_warning("InRange: Target is not a valid Node2D (%s: %s)" % [
+				LimboUtility.decorate_var(target_var), blackboard.get_var(target_var)])
 		return FAILURE
 
 	var dist_sq: float = agent.global_position.distance_squared_to(target.global_position)

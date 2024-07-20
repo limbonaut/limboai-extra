@@ -10,7 +10,7 @@
 #*
 @tool
 extends BTCondition
-## IsTimeElapsed checks if the given time passed since the root task started.
+## IsTimeElapsed checks if the given time passed since the root task started [code]RUNNING[/code].
 
 ## Specify duration in seconds.
 @export_range(0.0, 1000.0, 0.01) var time_sec: float:

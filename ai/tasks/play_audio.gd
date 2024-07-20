@@ -10,13 +10,13 @@
 #*
 @tool
 extends BTAction
-## PlayAudio: Starts playback of AudioStreamPlayer[2D, 3D] and returns SUCCESS.
+## PlayAudio starts playback of AudioStreamPlayer{2D,3D} and returns [code]SUCCESS[/code].
 
 
 ## Specify audio player node.
 @export var audio_player: BBNode
 
-var _audio_player  # Note: Untyped to support different audio player nodes.
+var _audio_player # Note: Untyped to support different audio player types.
 
 
 func _generate_name() -> String:
@@ -28,6 +28,10 @@ func _setup() -> void:
 	assert(_audio_player != null and _audio_player.has_method(&"play"))
 
 
-func _tick(_delta: float) -> int:
-	_audio_player.play()
-	return SUCCESS
+func _tick(_delta: float) -> Status:
+	if is_instance_valid(_audio_player):
+		_audio_player.play()
+		return SUCCESS
+	else:
+		push_warning("PlayAudio: Audio player not valid")
+		return FAILURE

@@ -10,7 +10,7 @@
 #*
 @tool
 extends BTAction
-## SaveNodePos: Save node position to blackboard and return SUCCESS.
+## SaveNodePos saves the position of a node on the blackboard and returns [code]SUCCESS[/code].
 
 
 ## Specify node.
@@ -28,7 +28,7 @@ func _generate_name() -> String:
 
 
 func _tick(_delta: float) -> Status:
-	var node_inst = node.get_value(agent, blackboard)  # Note: Untyped to support both Node2D and Node3D
+	var node_inst = node.get_value(agent, blackboard) # Note: Untyped to support both Node2D and Node3D
 	if is_instance_valid(node_inst):
 		blackboard.set_var(position_var, node_inst.global_position)
 		return SUCCESS

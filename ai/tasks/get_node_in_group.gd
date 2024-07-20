@@ -10,9 +10,8 @@
 #*
 @tool
 extends BTAction
-## GetNodeInGroup with the given index and return SUCCESS.
-##
-## Returns FAILURE if the group doesn't have a node with such index.
+## Stores a node from a scene group with the given index on the blackboard and returns [code]SUCCESS[/code]. [br]
+## Returns [code]FAILURE[/code] if the group doesn't have a node with such index.
 
 
 ## Node group name.

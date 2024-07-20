@@ -13,22 +13,22 @@ extends BTAction
 ## Dispatches an event to a [LimboHSM] and returns [code]SUCCESS[/code]. [br]
 ## Returns [code]FAILURE[/code] if [member hsm_var] doesn't refer to a valid [LimboState] on the blackboard.
 
-## Event to be dispatched.
+## Specify event to be dispatched.
 @export var event_name: String
 
-## Blackboard variable that holds a reference to [LimboHSM] or [LimboState].
-@export var hsm_var: StringName
+## Specify [LimboHSM] or [LimboState] node.
+@export var hsm_node: BBNode
 
 
 func _generate_name() -> String:
-	return "DispatchEvent \"%s\"  hsm: %s" % [event_name, LimboUtility.decorate_var(hsm_var)]
+	return "DispatchEvent \"%s\"  hsm: %s" % [event_name, hsm_node]
 
 
 func _tick(_delta: float) -> Status:
-	var hsm: LimboState = blackboard.get_var(hsm_var)
-	if not is_instance_valid(hsm):
-		push_error("DispatchEvent: HSM not found on the blackboard")
+	var state: LimboState = hsm_node.get_value(scene_root, blackboard)
+	if not is_instance_valid(state):
+		push_error("DispatchEvent: LimboState not valid: " + str(hsm_node))
 		return FAILURE
 
-	hsm.dispatch(event_name)
+	state.dispatch(event_name)
 	return SUCCESS

@@ -24,7 +24,7 @@ func _generate_name() -> String:
 
 
 func _setup() -> void:
-	_audio_player = audio_player.get_value(agent, blackboard)
+	_audio_player = audio_player.get_value(scene_root, blackboard)
 	assert(_audio_player != null and _audio_player.has_method(&"play"))
 
 

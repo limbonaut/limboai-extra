@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxmod76occdpg"]
+
+[ext_resource type="Script" path="res://examples/custom_bt_player/custom_bt_player.gd" id="1_6nidv"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_xrucv"]
+var/msg/name = &"msg"
+var/msg/type = 4
+var/msg/value = "Hello world!"
+var/msg/hint = 0
+var/msg/hint_string = ""
+
+[sub_resource type="BTConsolePrint" id="BTConsolePrint_xqede"]
+text = "%s (this message is printed every second)"
+bb_format_parameters = PackedStringArray("msg")
+
+[sub_resource type="BTDelay" id="BTDelay_hgb5t"]
+children = [SubResource("BTConsolePrint_xqede")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_fw4gl"]
+blackboard_plan = SubResource("BlackboardPlan_xrucv")
+root_task = SubResource("BTDelay_hgb5t")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_qocb7"]
+
+[node name="Custom BTPlayer Example" type="Node2D"]
+
+[node name="CustomBTPlayer" type="Node" parent="."]
+script = ExtResource("1_6nidv")
+behavior_tree = SubResource("BehaviorTree_fw4gl")
+blackboard_plan = SubResource("BlackboardPlan_qocb7")

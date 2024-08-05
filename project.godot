@@ -11,5 +11,4 @@ config_version=5
 [application]
 
 config/name="LimboAI Extra"
-config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+config/features=PackedStringArray("4.3", "Forward Plus")
